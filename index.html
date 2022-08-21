@@ -48,7 +48,7 @@
     </style>
     <title>Wifi Cafe</title>
   </head>
-  <body>
+  <body onload="checkLogin()">
     <div id="globe"></div>
 
     <section class="hero is-dark is-fullheight">
@@ -90,7 +90,7 @@
               </button>
             </div>
 
-            <div class="login-buttons">
+            <div id="login-buttons">
               <button
                 onclick="signIn('facebook')"
                 class="button is-link is-rounded is-fullwidth mb-3"
@@ -111,48 +111,52 @@
               </button>
             </div>
 
-            <div class="is-flex is-flex-direction-column is-align-items-center">
-              <div class="is-flex m-6">
-                <figure class="image is-48x48 is-round">
-                  <img
-                    class="is-rounded"
-                    src="https://bulma.io/images/placeholders/96x96.png"
-                    alt="Placeholder image"
-                  />
-                </figure>
-                <div class="ml-3">
-                  <p class="title is-4">John Smith</p>
-                  <p class="subtitle is-6">@johnsmith</p>
+            <div id="profile">
+              <div
+                class="is-flex is-flex-direction-column is-align-items-center"
+              >
+                <div class="is-flex m-6">
+                  <figure class="image is-48x48 is-round">
+                    <img
+                      class="is-rounded"
+                      src="https://bulma.io/images/placeholders/96x96.png"
+                      alt="Placeholder image"
+                    />
+                  </figure>
+                  <div class="ml-3">
+                    <p class="title is-4">John Smith</p>
+                    <p class="subtitle is-6">@johnsmith</p>
+                  </div>
                 </div>
+
+                <p class="is-align-self-flex-end mt-6">
+                  Available data<span class="p-3 is-size-4 has-text-weight-bold"
+                    >125MB</span
+                  >
+                </p>
               </div>
 
-              <p class="is-align-self-flex-end mt-6">
-                Available data<span class="p-3 is-size-4 has-text-weight-bold"
-                  >125MB</span
-                >
-              </p>
-            </div>
-
-            <div class="field has-addons">
-              <div class="control is-expanded">
-                <div class="select is-fullwidth">
-                  <select name="country">
-                    <option value="Argentina">1GB - R20</option>
-                    <option value="Bolivia">2GB - R30</option>
-                    <option value="Brazil">3GB - R40</option>
-                    <option value="Chile">5GB - R50</option>
-                    <option value="Colombia">6GB - R60</option>
-                    <option value="Ecuador">7GB - R70</option>
-                    <option value="Guyana">8GB - R80</option>
-                    <option value="Paraguay">10GB - R90</option>
-                    <option value="Peru">12GB - R100</option>
-                  </select>
+              <div class="field has-addons">
+                <div class="control is-expanded">
+                  <div class="select is-fullwidth">
+                    <select name="country">
+                      <option value="Argentina">1GB - R20</option>
+                      <option value="Bolivia">2GB - R30</option>
+                      <option value="Brazil">3GB - R40</option>
+                      <option value="Chile">5GB - R50</option>
+                      <option value="Colombia">6GB - R60</option>
+                      <option value="Ecuador">7GB - R70</option>
+                      <option value="Guyana">8GB - R80</option>
+                      <option value="Paraguay">10GB - R90</option>
+                      <option value="Peru">12GB - R100</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div class="control">
-                <button id="checkout" type="submit" class="button is-primary">
-                  <i class="fas fa-shopping-cart"></i>&nbsp;Get more data
-                </button>
+                <div class="control">
+                  <button id="checkout" type="submit" class="button is-primary">
+                    <i class="fas fa-shopping-cart"></i>&nbsp;Get more data
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -167,7 +171,6 @@
 
       const SUPABASE_URL = "https://jbkvhjjbsckelgmadinx.supabase.co";
       const _supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-      console.log("Supabase Instance: ", _supabase);
 
       const yoco = new window.YocoSDK({
         publicKey: "pk_test_ed3c54a6gOol69qa7f45",
@@ -187,6 +190,20 @@
       async function signout() {
         const { error } = await _supabase.auth.signOut();
         console.log(error);
+      }
+
+      function checkLogin() {
+        const user = _supabase.auth.user();
+        const loginButtons = document.getElementById("login-buttons");
+        const profile = document.getElementById("profile");
+
+        if (user) {
+          loginButtons.style.display == "none";
+          profile.style.display == "block";
+        } else {
+          loginButtons.style.display == "block";
+          profile.style.display == "none";
+        }
       }
 
       function checkout() {
