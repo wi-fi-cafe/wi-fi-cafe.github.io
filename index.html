@@ -48,7 +48,7 @@
     </style>
     <title>Wifi Cafe</title>
   </head>
-  <body onload="checkLogin()">
+  <body>
     <div id="globe"></div>
 
     <section class="hero is-dark is-fullheight">
@@ -143,16 +143,16 @@
         console.log(error);
       }
 
-      function checkLogin() {
-        const user = _supabase.auth.user();
-        if (user) {
-          window.location.replace(
-            "https://wi-fi-cafe.github.io/protected.html"
-          );
-        } else {
-          window.location.replace("https://wi-fi-cafe.github.io/index.html");
-        }
-      }
+      // function checkLogin() {
+      //   const user = _supabase.auth.user();
+      //   if (user) {
+      //     window.location.replace(
+      //       "https://wi-fi-cafe.github.io/protected.html"
+      //     );
+      //   } else {
+      //     window.location.replace("https://wi-fi-cafe.github.io/index.html");
+      //   }
+      // }
 
       function checkout() {
         yoco.showPopup({
