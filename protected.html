@@ -173,8 +173,9 @@
 
       function checkLogin() {
         const user = _supabase.auth.user();
-        if (!user)
-          window.location.replace("https://wi-fi-cafe.github.io/index.html");
+        alert(JSON.stringify(user));
+        // if (!user)
+        //   window.location.replace("https://wi-fi-cafe.github.io/index.html");
       }
 
       function checkout() {
