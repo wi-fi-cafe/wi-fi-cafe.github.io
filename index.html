@@ -158,10 +158,9 @@
 
       const user = _supabase.auth.user();
       document.getElementById("name").innerText = user.user_metadata.name;
-        document.getElementById("picture").src = user.user_metadata.picture;
-        document.getElementById("email").innerText = user.user_metadata.email;
+      document.getElementById("picture").src = user.user_metadata.picture;
+      document.getElementById("email").innerText = user.user_metadata.email;
       const amountInCents = 2799;
-      const email = "eugevanz@gmail.com";
 
       function checkout() {
         yoco.showPopup({
