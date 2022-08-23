@@ -55,7 +55,7 @@
       <div class="hero-body">
         <div class="columns has-text-light">
           <div class="column is-half">
-            <p class="title is-2 has-text-centered">Community Wi-Fi</p>
+            <p class="title is-2 has-text-centered">Wi-Fi Cafe</p>
             <p class="subtitle is-3 has-text-centered">
               Internet access for all
             </p>
@@ -156,19 +156,15 @@
       });
 
       const user = supabase.auth.user();
+      console.log(user);
       const amountInCents = 2799;
       const email = "eugevanz@gmail.com";
-
-      async function signout() {
-        const { error } = await _supabase.auth.signOut();
-        console.log(error);
-      }
 
       function checkout() {
         yoco.showPopup({
           amountInCents: amountInCents,
           currency: "ZAR",
-          name: "Community Wi-Fi",
+          name: "Wi-Fi Cafe",
           description: email,
           metadata: { email: email },
           callback: function (result) {
