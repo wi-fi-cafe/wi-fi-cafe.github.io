@@ -130,16 +130,28 @@
       const amountInCents = 2799;
       const email = "eugevanz@gmail.com";
 
-      async function signIn(provider) {
-        let { user, error } = await _supabase.auth.signIn({
-          provider: provider,
-        });
-        console.log(error);
-        console.log(user);
+      function signIn(provider) {
+        _supabase.auth
+          .signIn({
+            provider: provider,
+          })
+          .then((response) => {
+            response.error
+              ? alert(response.error.message)
+              : alert("Logged in as " + response.user.email);
+          })
+          .catch((err) => {
+            alert(err.response.text);
+          });
       }
 
-      async function signout() {
-        const { error } = await _supabase.auth.signOut();
+      function signout() {
+        _supabase.auth
+          .signOut()
+          .then((_response) => alert("Logout successful"))
+          .catch((err) => {
+            alert(err.response.text);
+          });
         console.log(error);
       }
 
