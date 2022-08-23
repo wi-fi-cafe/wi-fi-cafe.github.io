@@ -67,14 +67,15 @@
                 <div class="is-flex m-6">
                   <figure class="image is-48x48 is-round">
                     <img
+                      id="picture"
                       class="is-rounded"
                       src="https://bulma.io/images/placeholders/96x96.png"
                       alt="Placeholder image"
                     />
                   </figure>
                   <div class="ml-3">
-                    <p class="title is-4">John Smith</p>
-                    <p class="subtitle is-6">@johnsmith</p>
+                    <p id="name" class="title is-4">John Smith</p>
+                    <p id="email" class="subtitle is-6">@johnsmith</p>
                   </div>
                 </div>
 
@@ -156,7 +157,11 @@
       });
 
       const user = _supabase.auth.user();
-      console.log(user);
+      if (user) {
+        document.getElementById("name").innerText = user.user_metadata.name;
+        document.getElementById("picture").src = user.user_metadata.picture;
+        document.getElementById("email").src = user.user_metadata.email;
+      }
       const amountInCents = 2799;
       const email = "eugevanz@gmail.com";
 
