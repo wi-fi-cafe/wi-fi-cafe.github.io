@@ -150,10 +150,13 @@
       });
 
       const user = _supabase.auth.user();
-      document.getElementById("name").innerText = user.user_metadata.name;
-      document.getElementById("picture").src = user.user_metadata.picture;
-      document.getElementById("email").innerText = user.user_metadata.email;
-      document.getElementById("checkout").disabled = !user;
+      if (user) {
+        console.log(user);
+        document.getElementById("name").innerText = user.user_metadata.name;
+        document.getElementById("picture").src = user.user_metadata.picture;
+        document.getElementById("email").innerText = user.user_metadata.email;
+        document.getElementById("checkout").disabled = !user;
+      }
 
       function checkout() {
         yoco.showPopup({
