@@ -55,18 +55,11 @@
       <div class="hero-body">
         <div class="columns has-text-light">
           <div class="column is-half">
-            <p class="title is-2 has-text-centered">
-              Wi-Fi Cafe <span class="tag is-success">WELCOME</span>
-            </p>
-            <p class="subtitle is-3 has-text-centered">
-              Internet access for all
-            </p>
-
             <div id="profile">
               <div
-                class="is-flex is-flex-direction-column is-align-items-center"
+                class="is-flex is-flex-direction-column is-align-items-center mt-6 mb-6"
               >
-                <figure class="image is-96x96 is-round mt-6">
+                <figure class="image is-96x96 is-round">
                   <img
                     id="picture"
                     class="is-rounded"
@@ -77,9 +70,11 @@
                 <div class="mb-6 mt-1 has-text-centered">
                   <p id="name" class="title is-4">John Smith</p>
                   <p id="email" class="subtitle is-6">@johnsmith</p>
+                  <p>Wi-Fi Cafe <span class="tag is-success">PROFILE</span></p>
+                  <p>Internet access for all</p>
                 </div>
 
-                <p class="is-align-self-flex-end mt-6">
+                <p class="title is-2 mt-6">
                   Available data<span class="p-3 is-size-4 has-text-weight-bold"
                     >125MB</span
                   >
@@ -88,17 +83,17 @@
 
               <div class="field has-addons">
                 <div class="control is-expanded">
-                  <div class="select is-fullwidth">
-                    <select name="country">
-                      <option value="Argentina">1GB - R20</option>
-                      <option value="Bolivia">2GB - R30</option>
-                      <option value="Brazil">3GB - R40</option>
-                      <option value="Chile">5GB - R50</option>
-                      <option value="Colombia">6GB - R60</option>
-                      <option value="Ecuador">7GB - R70</option>
-                      <option value="Guyana">8GB - R80</option>
-                      <option value="Paraguay">10GB - R90</option>
-                      <option value="Peru">12GB - R100</option>
+                  <div class="select is-fullwidth is-rounded">
+                    <select name="tariff">
+                      <option value="2000">1GB - R20</option>
+                      <option value="3000">2GB - R30</option>
+                      <option value="4000">3GB - R40</option>
+                      <option value="5000">5GB - R50</option>
+                      <option value="6000">6GB - R60</option>
+                      <option value="7000">7GB - R70</option>
+                      <option value="8000">8GB - R80</option>
+                      <option value="9000">10GB - R90</option>
+                      <option value="10000">12GB - R100</option>
                     </select>
                   </div>
                 </div>
@@ -160,11 +155,11 @@
       document.getElementById("name").innerText = user.user_metadata.name;
       document.getElementById("picture").src = user.user_metadata.picture;
       document.getElementById("email").innerText = user.user_metadata.email;
-      const amountInCents = 2799;
+      document.getElementById("checkout").disabled = !user;
 
       function checkout() {
         yoco.showPopup({
-          amountInCents: amountInCents,
+          amountInCents: parseInt(document.getElementsByName("tariff").value),
           currency: "ZAR",
           name: "Wi-Fi Cafe",
           description: user.user_metadata.email,
